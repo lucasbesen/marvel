@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import { Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import configureStore, { history } from './redux/store/configureStore';
+import Routes from './router';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100%
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  padding: 2% 25%;
+  overflow-y: hidden;
+`;
+
+const store = configureStore();
+
+const App = () => (
+  <Wrapper>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Routes />
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
+  </Wrapper>
+);
 
 export default App;
