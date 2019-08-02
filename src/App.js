@@ -10,12 +10,11 @@ import Routes from './router';
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
-  height: 100%
+  height: 100%;
   justify-content: center;
   align-items: center;
   background-color: red;
   padding: 2% 25%;
-  overflow-y: hidden;
 `;
 
 const store = configureStore();

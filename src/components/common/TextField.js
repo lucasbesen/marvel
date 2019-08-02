@@ -11,8 +11,8 @@ const TextField = ({ input: { name, onChange, value }, meta, label }) => (
     value={value}
     inputProps={{
       style: {
-        width: 250
-      }
+        width: 250,
+      },
     }}
   />
 );

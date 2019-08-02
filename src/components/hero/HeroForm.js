@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 import Button from '@material-ui/core/Button/Button';
-import List from "@material-ui/core/List/List";
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import List from '@material-ui/core/List/List';
+import ListItem from '@material-ui/core/ListItem/ListItem';
+import ListItemText from '@material-ui/core/ListItemText/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBack';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -78,27 +78,25 @@ const HeroForm = ({ hero, history }) => {
                 <Field name="description" component={TextField} type="text" label="Description" fullWidth />
               </FieldWrapper>
               <div>
-                <Button variant="contained" color="secondary" size="small" type="submit" disabled={submitting || pristine}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                  type="submit"
+                  disabled={submitting || pristine}
+                >
                   Save
                 </Button>
               </div>
             </FieldsWrapper>
           </Wrapper>
-          <List
-            subheader={
-              <ListSubheader component="div">
-                Movies/TV Shows
-              </ListSubheader>
-            }
-          >
+          <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
             {hero.series &&
-            hero.series.items.map((item, index) => (
-              <ListItem key={`${item.name}-${index}`}>
-                <ListItemText
-                  primary={item.name}
-                />
-              </ListItem>
-            ))}
+              hero.series.items.map((item, index) => (
+                <ListItem key={`${item.name}-${index}`}>
+                  <ListItemText primary={item.name} />
+                </ListItem>
+              ))}
           </List>
         </form>
       )}

@@ -9,9 +9,10 @@ export const history = createBrowserHistory();
 
 export default ({ initialState } = {}) => {
   const enhancer = compose(
-    applyMiddleware(routerMiddleware(history)),
     applyMiddleware(thunk),
+    applyMiddleware(routerMiddleware(history)),
   );
+
   return createStore(
     combineReducers({
       router: connectRouter(history),

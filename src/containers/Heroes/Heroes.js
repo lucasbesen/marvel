@@ -1,71 +1,80 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
 
-import { fetchHeroes, getHero as test } from '../../redux/reducer/heroes/actions';
+import { fetchHeroes } from '../../redux/reducer/heroes/actions';
+import { Loading, Content } from '../../components/common';
 
-const StyledPaper = withStyles({
-  root: {
-    width: '1000px',
-    maxWidth: '1000px',
-    height: '500px',
-    maxHeight: '500px',
-    overflowY: 'auto',
-  },
-})(Paper);
+class Heroes extends Component {
+  componentDidMount() {
+    this.props.fetchHeroes();
+  }
 
-const Heroes = ({ heroes, pagination, fetchHeroes, getHero }) => {
-  const handleChangePage = (e, offset) => {
+  handleChangePage = (e, offset) => {
+    const { pagination, fetchHeroes } = this.props;
     fetchHeroes(pagination.limit, pagination.limit * offset);
   };
 
-  return (
-    <>
-      <StyledPaper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {heroes.map(hero => (
-              <TableRow key={hero.name}>
-                <TableCell>{hero.name}</TableCell>
-                <TableCell>{hero.description}</TableCell>
-                <TableCell>
-                  <button onClick={() => getHero(hero.id)}>visualizar</button>
-                </TableCell>
+  render() {
+    const { heroes, pagination, history } = this.props;
+
+    if (!heroes.length) {
+      return (
+        <Content>
+          <Loading />
+        </Content>
+      );
+    }
+    return (
+      <>
+        <Content>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          component="div"
-          count={pagination.total}
-          rowsPerPage={10}
-          page={pagination.offset / 10}
-          backIconButtonProps={{
-            'aria-label': 'previous page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'next page',
-          }}
-          onChangePage={handleChangePage}
-        />
-      </StyledPaper>
-    </>
-  );
-};
+            </TableHead>
+            <TableBody>
+              {heroes.map(hero => (
+                <TableRow key={hero.name}>
+                  <TableCell>{hero.name}</TableCell>
+                  <TableCell>{hero.description}</TableCell>
+                  <TableCell>
+                    <IconButton color="secondary" onClick={() => history.push(`/hero/${hero.id}`)}>
+                      <EditIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            component="div"
+            count={pagination.total}
+            rowsPerPage={10}
+            page={pagination.offset / 10}
+            backIconButtonProps={{
+              'aria-label': 'previous page',
+            }}
+            nextIconButtonProps={{
+              'aria-label': 'next page',
+            }}
+            onChangePage={this.handleChangePage}
+          />
+        </Content>
+      </>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   heroes: state.heroes.heroes || [],
@@ -75,9 +84,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchHeroes: (limit, offset) => {
     dispatch(fetchHeroes(limit, offset));
-  },
-  getHero: id => {
-    dispatch(test(id));
   },
 });
 

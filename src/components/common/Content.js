@@ -1,5 +1,5 @@
-import {withStyles} from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
+import { withStyles } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 
 const Content = withStyles({
   root: {
