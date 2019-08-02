@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Switch } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import configureStore, { history } from './redux/store/configureStore';
 import Routes from './router';
@@ -13,11 +16,12 @@ const Wrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: red;
-  padding: 2% 25%;
+  background-color: #ed161f;
+  padding: 50px 300px;
 `;
 
 const store = configureStore();
+toast.configure();
 
 const App = () => (
   <Wrapper>

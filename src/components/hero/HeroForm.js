@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
+import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button/Button';
 import List from '@material-ui/core/List/List';
 import ListItem from '@material-ui/core/ListItem/ListItem';
@@ -37,9 +38,7 @@ const Picture = styled.img`
   border-radius: 100px;
 `;
 
-const onSubmit = () => {
-  console.log('idjasidj');
-};
+const onSubmit = () => toast.success('Saved!');
 
 const validate = values => {
   const errors = {};

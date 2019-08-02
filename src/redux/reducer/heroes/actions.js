@@ -4,8 +4,8 @@ export const HERO = 'hero:HERO';
 export const HEROES = 'heroes:HEROES';
 export const PAGINATION = 'heroes:PAGINATION';
 
-export const fetchHeroes = (limit, offset, term) => async dispatch => {
-  const response = await listHeroesService(limit, offset, term);
+export const fetchHeroes = (limit, offset, name) => async dispatch => {
+  const response = await listHeroesService(limit, offset, name);
   dispatch({ type: HEROES, payload: response.results });
   dispatch({
     type: PAGINATION,

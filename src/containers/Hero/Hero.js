@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { getHero } from '../../redux/reducer/heroes/actions';
-import { Loading, Content } from '../../components/common';
+import { Content, NoData } from '../../components/common';
 import HeroForm from '../../components/hero/HeroForm';
 
 const Wrapper = styled.div`
@@ -24,10 +24,11 @@ class Hero extends Component {
     if (!Object.keys(hero).length) {
       return (
         <Content>
-          <Loading />
+          <NoData />
         </Content>
       );
     }
+
     return (
       <Content>
         <Wrapper>

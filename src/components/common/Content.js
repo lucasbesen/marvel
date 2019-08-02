@@ -3,8 +3,8 @@ import Paper from '@material-ui/core/Paper';
 
 const Content = withStyles({
   root: {
-    width: '1000px',
-    maxWidth: '1000px',
+    width: '720px',
+    maxWidth: '720px',
     height: '500px',
     maxHeight: '500px',
     overflowY: 'auto',

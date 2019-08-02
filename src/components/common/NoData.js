@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CircularProgress } from '@material-ui/core';
 
-const Wrapper = styled.div`
+import { Content } from '.';
+
+const Text = styled.div`
   display: flex;
   flex: 1;
   height: 100%;
@@ -11,10 +12,10 @@ const Wrapper = styled.div`
   align-self: center;
 `;
 
-const Loading = () => (
-  <Wrapper>
-    <CircularProgress />
-  </Wrapper>
+const NoData = () => (
+  <Content>
+    <Text>No Data</Text>
+  </Content>
 );
 
-export default Loading;
+export default NoData;

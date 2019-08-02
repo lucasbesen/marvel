@@ -29,7 +29,9 @@ const Home = ({ history }) => (
       <Button variant="contained" color="primary" onClick={() => history.push('/heroes')}>
         Check the Heroes
       </Button>
-      <h3>Made by @lucasbesen</h3>
+      <h3>
+        Made by <a href="https://www.github.com/lucasbesen">@lucasbesen</a>
+      </h3>
     </Wrapper>
   </Content>
 );
