@@ -38,7 +38,7 @@ class Heroes extends Component {
         <Content>
           <Toolbar>
             <div>
-              <TextField input={{ onBlur: this.handleSearch }} meta={{}} />
+              <TextField input={{ onBlur: this.handleSearch }} meta={{}} label="It feches on blur" />
             </div>
           </Toolbar>
           {!heroes.length ? (
@@ -57,9 +57,9 @@ class Heroes extends Component {
                 </TableHead>
                 <TableBody>
                   {heroes.map(hero => (
-                    <TableRow key={hero.name}>
-                      <TableCell>{hero.name}</TableCell>
-                      <TableCell>{hero.description}</TableCell>
+                    <TableRow key={hero.id}>
+                      <TableCell>{localStorage.getItem(`${hero.id}-name`) || hero.name}</TableCell>
+                      <TableCell>{localStorage.getItem(`${hero.id}-description`) || hero.description}</TableCell>
                       <TableCell>
                         <IconButton color="secondary" onClick={() => history.push(`/hero/${hero.id}`)}>
                           <EditIcon />

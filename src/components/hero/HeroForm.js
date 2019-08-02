@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 import { toast } from 'react-toastify';
@@ -38,69 +38,78 @@ const Picture = styled.img`
   border-radius: 100px;
 `;
 
-const onSubmit = () => toast.success('Saved!');
+class HeroForm extends Component {
+  onSubmit = values => {
+    const { hero } = this.props;
 
-const validate = values => {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Required';
-  }
-  if (!values.description) {
-    errors.description = 'Required';
-  }
-  return errors;
-};
-
-const HeroForm = ({ hero, history }) => {
-  const initialValues = {
-    name: hero.name,
-    description: hero.description,
+    localStorage.setItem(`${hero.id}-name`, values.name);
+    localStorage.setItem(`${hero.id}-description`, values.description);
+    toast.success('Saved!')
   };
 
-  return (
-    <Form
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      validate={validate}
-      render={({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
-          <IconButton onClick={() => history.push('/heroes')}>
-            <BackIcon />
-          </IconButton>
-          <Wrapper>
-            <Picture src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
-            <FieldsWrapper>
-              <FieldWrapper>
-                <Field name="name" component={TextField} type="text" label="Name" fullWidth />
-              </FieldWrapper>
-              <FieldWrapper>
-                <Field name="description" component={TextField} type="text" label="Description" fullWidth />
-              </FieldWrapper>
-              <div>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="small"
-                  type="submit"
-                  disabled={submitting || pristine}
-                >
-                  Save
-                </Button>
-              </div>
-            </FieldsWrapper>
-          </Wrapper>
-          <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
-            {hero.series &&
+  validate = values => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = 'Required';
+    }
+    if (!values.description) {
+      errors.description = 'Required';
+    }
+    return errors;
+  };
+
+  render() {
+    const { hero, history } = this.props;
+    const initialValues = {
+      name: localStorage.getItem(`${hero.id}-name`) || hero.name,
+      description: localStorage.getItem(`${hero.id}-description`) || hero.description,
+    };
+
+    return (
+      <Form
+        onSubmit={this.onSubmit}
+        initialValues={initialValues}
+        validate={this.validate}
+        render={({ handleSubmit, submitting, pristine }) => (
+          <form onSubmit={handleSubmit}>
+            <IconButton onClick={() => history.push('/heroes')}>
+              <BackIcon />
+            </IconButton>
+            <Wrapper>
+              <Picture src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
+              <FieldsWrapper>
+                <FieldWrapper>
+                  <Field name="name" component={TextField} type="text" label="Name" fullWidth />
+                </FieldWrapper>
+                <FieldWrapper>
+                  <Field name="description" component={TextField} type="text" label="Description" fullWidth />
+                </FieldWrapper>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    type="submit"
+                    disabled={submitting || pristine}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </FieldsWrapper>
+            </Wrapper>
+            <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
+              {hero.series &&
               hero.series.items.map((item, index) => (
                 <ListItem key={`${item.name}-${index}`}>
                   <ListItemText primary={item.name} />
                 </ListItem>
               ))}
-          </List>
-        </form>
-      )}
-    />
-  );
-};
+            </List>
+          </form>
+        )}
+      />
+    );
+  }
+}
 
 export default HeroForm;
