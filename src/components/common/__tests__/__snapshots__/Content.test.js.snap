@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render content without error 1`] = `
+<div
+  className="MuiPaper-root WithStyles(ForwardRef(Paper))-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <p>
+    Testing Content component
+  </p>
+</div>
+`;

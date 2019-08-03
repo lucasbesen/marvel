@@ -44,7 +44,7 @@ class HeroForm extends Component {
 
     localStorage.setItem(`${hero.id}-name`, values.name);
     localStorage.setItem(`${hero.id}-description`, values.description);
-    toast.success('Saved!')
+    toast.success('Saved!');
   };
 
   validate = values => {
@@ -99,11 +99,11 @@ class HeroForm extends Component {
             </Wrapper>
             <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
               {hero.series &&
-              hero.series.items.map((item, index) => (
-                <ListItem key={`${item.name}-${index}`}>
-                  <ListItemText primary={item.name} />
-                </ListItem>
-              ))}
+                hero.series.items.map((item, index) => (
+                  <ListItem key={`${item.name}-${index}`}>
+                    <ListItemText primary={item.name} />
+                  </ListItem>
+                ))}
             </List>
           </form>
         )}

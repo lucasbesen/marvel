@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render TextField with helper texts 1`] = `
+<div
+  className="MuiFormControl-root MuiTextField-root"
+>
+  <label
+    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-error Mui-error"
+    data-shrink={false}
+  >
+    This is a text input
+  </label>
+  <div
+    className="MuiInputBase-root MuiInput-root MuiInput-underline Mui-error Mui-error MuiInputBase-formControl MuiInput-formControl"
+    onClick={[Function]}
+  >
+    <input
+      aria-invalid={true}
+      className="MuiInputBase-input MuiInput-input"
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      style={
+        Object {
+          "width": 250,
+        }
+      }
+      type="text"
+    />
+  </div>
+  <p
+    className="MuiFormHelperText-root Mui-error"
+  >
+    Error testing
+  </p>
+</div>
+`;
+
+exports[`should render TextField without error 1`] = `
+<div
+  className="MuiFormControl-root MuiTextField-root"
+>
+  <label
+    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+    data-shrink={false}
+  >
+    This is a text input
+  </label>
+  <div
+    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+    onClick={[Function]}
+  >
+    <input
+      aria-invalid={false}
+      className="MuiInputBase-input MuiInput-input"
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      style={
+        Object {
+          "width": 250,
+        }
+      }
+      type="text"
+    />
+  </div>
+</div>
+`;

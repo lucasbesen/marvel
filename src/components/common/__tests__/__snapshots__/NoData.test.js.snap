@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render NoData without error 1`] = `
+<div
+  className="MuiPaper-root WithStyles(ForwardRef(Paper))-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <div
+    className="sc-bdVaJa hNtgBK"
+  >
+    No Data
+  </div>
+</div>
+`;
