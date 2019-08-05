@@ -2,7 +2,7 @@
 
 ## :hammer: &nbsp; How to run the code
 
-First, you need to configure your `.env`. I put a default config on `.env.test`:
+First, you need to configure your `.env`:
 
 ```sh
 cp .env.test .env
