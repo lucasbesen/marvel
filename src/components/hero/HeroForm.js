@@ -1,6 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button/Button';
 import List from '@material-ui/core/List/List';
@@ -12,35 +11,10 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 import type { History } from 'history';
 
-import { TextField } from '../../components/common';
+import { Card } from '../../components/common';
 
 import type { Hero, Item } from '../../types/Hero';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex: 1;
-  width: 100%;
-  background-color: #fff;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-
-const FieldsWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-left: 10%;
-`;
-
-const FieldWrapper = styled.div`
-  display: flex;
-  flex: 1;
-`;
-
-const Picture = styled.img`
-  width: 200px;
-  border-radius: 100px;
-`;
+import { getByLocalStorage } from '../../helpers';
 
 type FormRender = {
   handleSubmit: () => void,
@@ -83,11 +57,19 @@ class HeroForm extends React.Component<Props> {
     return errors;
   };
 
+  renderCard = (submitting: boolean, pristine: boolean): React.Node => (
+    <div>
+      <Button variant="contained" color="secondary" size="small" type="submit" disabled={submitting || pristine}>
+        Save
+      </Button>
+    </div>
+  );
+
   render(): React.Node {
     const { hero, history } = this.props;
     const initialValues: Values = {
-      name: localStorage.getItem(`${hero.id}-name`) || hero.name,
-      description: localStorage.getItem(`${hero.id}-description`) || hero.description,
+      name: getByLocalStorage(hero.id, hero.name, 'name'),
+      description: getByLocalStorage(hero.id, hero.description, 'description'),
     };
 
     return (
@@ -100,28 +82,7 @@ class HeroForm extends React.Component<Props> {
             <IconButton onClick={() => history.push('/heroes')}>
               <BackIcon />
             </IconButton>
-            <Wrapper>
-              <Picture src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
-              <FieldsWrapper>
-                <FieldWrapper>
-                  <Field name="name" component={TextField} type="text" label="Name" fullWidth />
-                </FieldWrapper>
-                <FieldWrapper>
-                  <Field name="description" component={TextField} type="text" label="Description" fullWidth />
-                </FieldWrapper>
-                <div>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    type="submit"
-                    disabled={submitting || pristine}
-                  >
-                    Save
-                  </Button>
-                </div>
-              </FieldsWrapper>
-            </Wrapper>
+            <Card hero={hero} renderAction={() => this.renderCard(submitting, pristine)} />
             <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
               {hero.series &&
                 hero.series.items.map((item: Item, index: number) => (

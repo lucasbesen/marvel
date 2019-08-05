@@ -1,24 +1,29 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-import EditIcon from '@material-ui/icons/Edit';
-import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import type { History } from 'history';
 
 import { fetchHeroes } from '../../redux/reducer/heroes/actions';
-import { Content, NoData } from '../../components/common';
-import TextField from '../../components/common/TextField';
+import { Content, NoData, Card, TextField } from '../../components/common';
 
 import type { Pagination } from '../../types/Pagination';
 import type { Hero } from '../../types/Hero';
 import type { State } from '../../types/State';
+
+const GridContainer = styled.div`
+  display: grid;
+  padding: 24px;
+  grid-template-columns: 50% 50%;
+`;
+
+const GridColumn = styled.div`
+  display: inline-grid;
+  max-height: 150px;
+  cursor: pointer;
+`;
 
 type Props = {
   pagination: Pagination,
@@ -60,28 +65,13 @@ class Heroes extends React.Component<Props> {
             </Content>
           ) : (
             <>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Action</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {heroes.map(hero => (
-                    <TableRow key={hero.id}>
-                      <TableCell>{localStorage.getItem(`${hero.id}-name`) || hero.name}</TableCell>
-                      <TableCell>{localStorage.getItem(`${hero.id}-description`) || hero.description}</TableCell>
-                      <TableCell>
-                        <IconButton color="secondary" onClick={() => history.push(`/hero/${hero.id}`)}>
-                          <EditIcon />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <GridContainer>
+                {heroes.map(hero => (
+                  <GridColumn key={hero.id} onClick={() => history.push(`/hero/${hero.id}`)}>
+                    <Card hero={hero} readOnly />
+                  </GridColumn>
+                ))}
+              </GridContainer>
               <TablePagination
                 component="div"
                 count={pagination.total || 0}
