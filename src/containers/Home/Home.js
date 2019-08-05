@@ -23,17 +23,22 @@ const Image = styled.img`
   margin-bottom: 20px;
 `;
 
+const Text = styled.p`
+  text-align: center;
+  margin: 0px 20px 20px 20px;
+`;
+
 const Home = ({ history }: History): React.Node => (
   <Content>
     <Wrapper>
       <Image src={MARVEL_IMAGE_URL} />
-      <p>Simple app using React + Redux + Styled Components + Jest</p>
+      <Text>Simple app using React + Redux + Styled Components + Jest</Text>
       <Button variant="contained" color="primary" onClick={() => history.push('/heroes')}>
         Check the Heroes
       </Button>
-      <h3>
+      <p>
         Made by <a href="https://www.github.com/lucasbesen">@lucasbesen</a>
-      </h3>
+      </p>
     </Wrapper>
   </Content>
 );
