@@ -79,6 +79,7 @@ class Heroes extends React.Component<Props> {
               <TablePagination
                 component="div"
                 count={pagination.total || 0}
+                rowsPerPageOptions={[10]}
                 rowsPerPage={10}
                 page={pagination.offset / 10}
                 backIconButtonProps={{
