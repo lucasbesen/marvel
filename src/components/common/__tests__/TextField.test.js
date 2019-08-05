@@ -5,7 +5,7 @@ import TextField from '../TextField';
 
 it('should render TextField without error', () => {
   const component = renderer.create(
-    <TextField input={{ onBlur: jest.fn(), onChange: jest.fn() }} meta={{}} label="This is a text input" />,
+    <TextField input={{ onBlur: jest.fn(), onChange: jest.fn() }} meta={{}} label="This is a text input" />
   );
   const tree = component.toJSON();
 

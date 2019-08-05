@@ -7,7 +7,7 @@ it('should render content without error', () => {
   const component = renderer.create(
     <Content>
       <p>Testing Content component</p>
-    </Content>,
+    </Content>
   );
 
   const tree = component.toJSON();

@@ -40,11 +40,11 @@ const Title = styled.span`
 
 type Props = {
   hero: Hero,
-  renderAction?: () => React.Node,
+  renderAction?: () => React.ReactNode,
   readOnly?: boolean,
 };
 
-const Card = ({ hero, renderAction, readOnly }: Props): React.Node => (
+const Card = ({ hero, renderAction, readOnly }: Props): React.ReactNode => (
   <Wrapper>
     <Picture readOnly={readOnly} src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
     <FieldsWrapper>

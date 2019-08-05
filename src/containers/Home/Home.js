@@ -28,7 +28,7 @@ const Text = styled.p`
   margin: 0px 20px 20px 20px;
 `;
 
-const Home = ({ history }: History): React.Node => (
+const Home = ({ history }: History): React.ReactNode => (
   <Content>
     <Wrapper>
       <Image src={MARVEL_IMAGE_URL} />

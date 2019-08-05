@@ -30,7 +30,7 @@ class Hero extends React.Component<Props> {
     this.props.getHero(this.props.match.params.id);
   }
 
-  render(): React.Node {
+  render(): React.ReactNode {
     const { hero, history } = this.props;
 
     if (!Object.keys(hero).length) {

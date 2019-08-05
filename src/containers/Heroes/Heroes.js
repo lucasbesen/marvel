@@ -41,7 +41,7 @@ class Heroes extends React.Component<Props> {
     this.props.fetchHeroes();
   }
 
-  handleChangePage = (e, offset) => {
+  handleChangePage = (e: React.Event, offset: string) => {
     const { pagination, fetchHeroes } = this.props;
     fetchHeroes(pagination.limit, pagination.limit * offset);
   };
@@ -52,7 +52,7 @@ class Heroes extends React.Component<Props> {
     fetchHeroes(pagination.limit, pagination.offset, value);
   };
 
-  render() {
+  render(): React.ReactFragment {
     const { heroes, pagination, history } = this.props;
 
     return (

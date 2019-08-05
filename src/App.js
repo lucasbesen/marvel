@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const store: Store = configureStore();
 toast.configure();
 
-const App = (): React.Node => (
+const App = (): React.ReactNode => (
   <Wrapper>
     <Provider store={store}>
       <ConnectedRouter history={history}>

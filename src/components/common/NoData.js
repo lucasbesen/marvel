@@ -12,7 +12,7 @@ const Text = styled.div`
   align-self: center;
 `;
 
-const NoData = (): React.Node => (
+const NoData = (): React.ReactNode => (
   <Content>
     <Text>No Data</Text>
   </Content>

@@ -57,7 +57,7 @@ class HeroForm extends React.Component<Props> {
     return errors;
   };
 
-  renderCard = (submitting: boolean, pristine: boolean): React.Node => (
+  renderCard = (submitting: boolean, pristine: boolean): React.ReactNode => (
     <div>
       <Button variant="contained" color="secondary" size="small" type="submit" disabled={submitting || pristine}>
         Save
@@ -65,7 +65,7 @@ class HeroForm extends React.Component<Props> {
     </div>
   );
 
-  render(): React.Node {
+  render(): React.ReactNode {
     const { hero, history } = this.props;
     const initialValues: Values = {
       name: getByLocalStorage(hero.id, hero.name, 'name'),
@@ -77,7 +77,7 @@ class HeroForm extends React.Component<Props> {
         onSubmit={this.onSubmit}
         initialValues={initialValues}
         validate={this.validate}
-        render={({ handleSubmit, submitting, pristine }: FormRender): React.Node => (
+        render={({ handleSubmit, submitting, pristine }: FormRender): React.ReactNode => (
           <form onSubmit={handleSubmit}>
             <IconButton onClick={() => history.push('/heroes')}>
               <BackIcon />
