@@ -23,6 +23,10 @@ const GridColumn = styled.div`
   display: inline-grid;
   max-height: 150px;
   cursor: pointer;
+  padding: 5px 5px 0px 5px;
+  &:hover {
+    border: 1px solid #d3d3d3;
+  }
 `;
 
 type Props = {

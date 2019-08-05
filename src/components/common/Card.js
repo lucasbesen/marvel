@@ -34,6 +34,10 @@ const Picture = styled.img`
   border-radius: ${({ readOnly }: boolean) => (readOnly ? '30px' : '100px')};
 `;
 
+const Title = styled.span`
+  font-weight: 600;
+`;
+
 type Props = {
   hero: Hero,
   renderAction?: () => React.Node,
@@ -46,7 +50,7 @@ const Card = ({ hero, renderAction, readOnly }: Props): React.Node => (
     <FieldsWrapper>
       <FieldWrapper>
         {readOnly ? (
-          <h4>{getByLocalStorage(hero.id, hero.name, 'name')}</h4>
+          <Title>{getByLocalStorage(hero.id, hero.name, 'name')}</Title>
         ) : (
           <Field name="name" component={TextField} type="text" label="Name" fullWidth />
         )}
