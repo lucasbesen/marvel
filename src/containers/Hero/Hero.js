@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
+import type { History } from 'history';
 
 import { getHero } from '../../redux/reducer/heroes/actions';
 import { Content, NoData } from '../../components/common';
 import HeroForm from '../../components/hero/HeroForm';
+
+import type { Hero as HeroType } from '../../types/Hero';
+import type { State } from '../../types/State';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,11 +19,18 @@ const Wrapper = styled.div`
   padding-top: 20px;
 `;
 
-class Hero extends Component {
+type Props = {
+  hero: HeroType,
+  history: History,
+  getHero: (id: string) => void,
+};
+
+class Hero extends React.Component<Props> {
   componentDidMount() {
     this.props.getHero(this.props.match.params.id);
   }
-  render() {
+
+  render(): React.Node {
     const { hero, history } = this.props;
 
     if (!Object.keys(hero).length) {
@@ -39,12 +51,12 @@ class Hero extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State): State => ({
   hero: state.heroes.hero,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getHero: id => {
+  getHero: (id: string) => {
     dispatch(getHero(id));
   },
 });

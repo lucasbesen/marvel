@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,11 +10,24 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 
+import type { History } from 'history';
+
 import { fetchHeroes } from '../../redux/reducer/heroes/actions';
 import { Content, NoData } from '../../components/common';
 import TextField from '../../components/common/TextField';
 
-class Heroes extends Component {
+import type { Pagination } from '../../types/Pagination';
+import type { Hero } from '../../types/Hero';
+import type { State } from '../../types/State';
+
+type Props = {
+  pagination: Pagination,
+  heroes: [Hero],
+  history: History,
+  fetchHeroes: (limit: number, offset: number, name: string) => void,
+};
+
+class Heroes extends React.Component<Props> {
   componentDidMount() {
     this.props.fetchHeroes();
   }
@@ -24,8 +37,8 @@ class Heroes extends Component {
     fetchHeroes(pagination.limit, pagination.limit * offset);
   };
 
-  handleSearch = e => {
-    const value = e.target.value;
+  handleSearch = (e: React.Event) => {
+    const value: string = e.target.value;
     const { pagination, fetchHeroes } = this.props;
     fetchHeroes(pagination.limit, pagination.offset, value);
   };
@@ -90,13 +103,13 @@ class Heroes extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   heroes: state.heroes.heroes || [],
   pagination: state.heroes.pagination,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchHeroes: (limit, offset, name) => {
+  fetchHeroes: (limit: number, offset: number, name: string) => {
     dispatch(fetchHeroes(limit, offset, name));
   },
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 import { Content } from '.';
@@ -12,7 +12,7 @@ const Text = styled.div`
   align-self: center;
 `;
 
-const NoData = () => (
+const NoData = (): React.Node => (
   <Content>
     <Text>No Data</Text>
   </Content>

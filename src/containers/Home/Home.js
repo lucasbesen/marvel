@@ -1,10 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 
+import type { History } from 'history';
+
 import { Content } from '../../components/common';
 
-const MARVEL_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg';
+const MARVEL_IMAGE_URL: string = 'https://upload.wikimedia.org/wikipedia/commons/0/04/MarvelLogo.svg';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +23,7 @@ const Image = styled.img`
   margin-bottom: 20px;
 `;
 
-const Home = ({ history }) => (
+const Home = ({ history }: History): React.Node => (
   <Content>
     <Wrapper>
       <Image src={MARVEL_IMAGE_URL} />

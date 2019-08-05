@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { Route } from 'react-router';
 
 import Home from '../containers/Home';
 import Heroes from '../containers/Heroes';
 import Hero from '../containers/Hero';
 
-const Routes = () => (
+const Routes = (): React.Node => (
   <>
     <Route exact path="/" component={Home} />
     <Route exact path="/heroes" component={Heroes} />

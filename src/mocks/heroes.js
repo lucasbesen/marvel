@@ -1,4 +1,6 @@
-export const heroMock = {
+import type { Hero } from '../types/Hero';
+
+export const heroMock: Hero = {
   id: 1,
   name: 'Captain America',
   thumbnail: {

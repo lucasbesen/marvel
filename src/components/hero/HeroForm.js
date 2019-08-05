@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 import { toast } from 'react-toastify';
@@ -10,7 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import BackIcon from '@material-ui/icons/ArrowBack';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
+import type { History } from 'history';
+
 import { TextField } from '../../components/common';
+
+import type { Hero, Item } from '../../types/Hero';
 
 const Wrapper = styled.div`
   display: flex;
@@ -38,8 +42,29 @@ const Picture = styled.img`
   border-radius: 100px;
 `;
 
-class HeroForm extends Component {
-  onSubmit = values => {
+type FormRender = {
+  handleSubmit: () => void,
+  submitting: boolean,
+  pristine: boolean,
+};
+
+type Error = {
+  name?: string,
+  description?: string,
+};
+
+type Values = {
+  name?: string,
+  description?: string,
+};
+
+type Props = {
+  hero: Hero,
+  history: History,
+};
+
+class HeroForm extends React.Component<Props> {
+  onSubmit = (values: Values): void => {
     const { hero } = this.props;
 
     localStorage.setItem(`${hero.id}-name`, values.name);
@@ -47,8 +72,8 @@ class HeroForm extends Component {
     toast.success('Saved!');
   };
 
-  validate = values => {
-    const errors = {};
+  validate = (values: Values): Error => {
+    const errors: Error = {};
     if (!values.name) {
       errors.name = 'Required';
     }
@@ -58,9 +83,9 @@ class HeroForm extends Component {
     return errors;
   };
 
-  render() {
+  render(): React.Node {
     const { hero, history } = this.props;
-    const initialValues = {
+    const initialValues: Values = {
       name: localStorage.getItem(`${hero.id}-name`) || hero.name,
       description: localStorage.getItem(`${hero.id}-description`) || hero.description,
     };
@@ -70,7 +95,7 @@ class HeroForm extends Component {
         onSubmit={this.onSubmit}
         initialValues={initialValues}
         validate={this.validate}
-        render={({ handleSubmit, submitting, pristine }) => (
+        render={({ handleSubmit, submitting, pristine }: FormRender): React.Node => (
           <form onSubmit={handleSubmit}>
             <IconButton onClick={() => history.push('/heroes')}>
               <BackIcon />
@@ -99,7 +124,7 @@ class HeroForm extends Component {
             </Wrapper>
             <List subheader={<ListSubheader component="div">Movies/TV Shows</ListSubheader>}>
               {hero.series &&
-                hero.series.items.map((item, index) => (
+                hero.series.items.map((item: Item, index: number) => (
                   <ListItem key={`${item.name}-${index}`}>
                     <ListItemText primary={item.name} />
                   </ListItem>

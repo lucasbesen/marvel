@@ -3,11 +3,16 @@ import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 
+import { History } from 'history';
+import type { Store } from 'redux';
+
 import heroesReducer from '../reducer/heroes/heroesReducer';
 
-export const history = createBrowserHistory();
+import type { State } from '../../types/State';
 
-export default ({ initialState } = {}) => {
+export const history: History = createBrowserHistory();
+
+export default ({ initialState }: State = {}): Store => {
   const enhancer = compose(
     applyMiddleware(thunk),
     applyMiddleware(routerMiddleware(history)),
